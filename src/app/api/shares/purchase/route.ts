@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { shareAPI } from "@/lib/api"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 // POST /api/shares/purchase - Purchase asset shares
 export async function POST(request: NextRequest) {
   try {

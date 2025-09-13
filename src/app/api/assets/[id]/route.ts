@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { assetAPI } from "@/lib/api"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 // GET /api/assets/[id] - Get asset by ID
 export async function GET(
   request: NextRequest,

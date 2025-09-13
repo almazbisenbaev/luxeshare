@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -95,9 +96,11 @@ export function AssetCard({
       </CardContent>
 
       <CardFooter className="p-4 pt-0">
-        <Button className="w-full" disabled={availableShares === 0}>
-          {availableShares === 0 ? "Fully Owned" : "View Details"}
-        </Button>
+        <Link href={`/property/${id}`} className="w-full">
+          <Button className="w-full" disabled={availableShares === 0}>
+            {availableShares === 0 ? "Fully Owned" : "View Details"}
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   )

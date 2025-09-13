@@ -1,11 +1,9 @@
 "use client"
 
-
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { useWallet } from "@/lib/wallet-context"
-
 import { InvestorDashboard } from "@/components/dashboard/investor-dashboard"
+import { useWallet } from "@/lib/wallet-context"
 import { WalletConnect } from "@/components/wallet-connect"
 
 

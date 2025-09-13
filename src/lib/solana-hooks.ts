@@ -30,7 +30,7 @@ export function useNFTOperations() {
   const [isLoading, setIsLoading] = useState(false)
 
   const mintAssetNFT = useCallback(
-    async (_metadata: NFTMetadata): Promise<string> => {
+    async (): Promise<string> => {
       if (!wallet.connected) throw new Error("Wallet not connected")
 
       setIsLoading(true)
@@ -105,7 +105,7 @@ export function useSPLTokenOperations() {
   )
 
   const transferShares = useCallback(
-    async (_tokenMint: string, _recipient: string, _amount: number): Promise<string> => {
+    async (): Promise<string> => {
       if (!wallet.connected) throw new Error("Wallet not connected")
 
       setIsLoading(true)
@@ -227,12 +227,7 @@ export function useSmartContractOperations() {
   const [isLoading, setIsLoading] = useState(false)
 
   const registerAssetOnChain = useCallback(
-    async (_assetData: {
-      name: string
-      description: string
-      metadataUri: string
-      totalShares: number
-    }): Promise<string> => {
+    async (): Promise<string> => {
       if (!wallet.connected) throw new Error("Wallet not connected")
 
       setIsLoading(true)
@@ -267,7 +262,7 @@ export function useSmartContractOperations() {
   )
 
   const createBookingOnChain = useCallback(
-    async (_assetAccount: string, _startDate: number, _endDate: number, _amount: number): Promise<string> => {
+    async (): Promise<string> => {
       if (!wallet.connected) throw new Error("Wallet not connected")
 
       setIsLoading(true)

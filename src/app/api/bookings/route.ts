@@ -1,6 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { bookingAPI } from "@/lib/api"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
 // POST /api/bookings - Create booking request
 export async function POST(request: NextRequest) {
   try {

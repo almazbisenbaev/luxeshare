@@ -203,14 +203,14 @@ export const shareAPI = {
 // IPFS/Arweave mock functions
 export const storageAPI = {
   // Upload image to IPFS (mocked)
-  uploadImage: async (_file: File): Promise<string> => {
+  uploadImage: async (): Promise<string> => {
     await new Promise((resolve) => setTimeout(resolve, 2000))
     // Mock IPFS hash
     return `ipfs://QmX${Math.random().toString(36).substr(2, 44)}`
   },
 
   // Upload metadata to Arweave (mocked)
-  uploadMetadata: async (_metadata: object): Promise<string> => {
+  uploadMetadata: async (): Promise<string> => {
     await new Promise((resolve) => setTimeout(resolve, 1500))
     // Mock Arweave transaction ID
     return `ar://${Math.random().toString(36).substr(2, 43)}`

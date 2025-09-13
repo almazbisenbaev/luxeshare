@@ -1,13 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { AssetCard } from "@/components/asset-card"
-import { Calendar, TrendingUp, Wallet, Clock, MapPin } from "lucide-react"
-import { toast } from "@/hooks/use-toast"
+import { Calendar, TrendingUp, Wallet } from "lucide-react"
 
 // Mock data
 const mockPortfolio = [
@@ -65,12 +62,6 @@ const availableAssets = [
 export function InvestorDashboard() {
 
 
-  const handleBuyShares = (_assetId: string, _shares: number) => {
-    toast({
-      title: "Shares Purchased",
-      description: `Successfully purchased ${_shares} shares`,
-    })
-  }
 
   const totalPortfolioValue = mockPortfolio.reduce((sum, item) => sum + item.currentValue * item.shares, 0)
   const totalIncome = mockPortfolio.reduce((sum, item) => sum + item.income, 0)
