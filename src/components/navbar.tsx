@@ -3,12 +3,12 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Wallet } from "lucide-react"
+import { Menu, X, Wallet, LogOut } from "lucide-react"
 import { useWallet } from "@/lib/wallet-context"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { wallet, connectWallet } = useWallet()
+  const { wallet, connectWallet, disconnectWallet } = useWallet()
 
   const handleQuickConnect = async () => {
     try {
@@ -16,6 +16,11 @@ export function Navbar() {
     } catch (error) {
       console.error("Quick connect failed:", error)
     }
+  }
+
+  const handleLogout = () => {
+    disconnectWallet()
+    setIsMenuOpen(false)
   }
 
   return (
@@ -58,6 +63,10 @@ export function Navbar() {
                     Dashboard
                   </Button>
                 </Link>
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  <LogOut className="w-4 h-4" />
+                  {/* Logout */}
+                </Button>
               </div>
             ) : (
               <Button variant="outline" size="sm" onClick={handleQuickConnect}>
@@ -121,6 +130,15 @@ export function Navbar() {
                         Dashboard
                       </Button>
                     </Link>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="w-full bg-transparent"
+                      onClick={handleLogout}
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </Button>
                   </div>
                 ) : (
                   <Button
