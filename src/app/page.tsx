@@ -5,8 +5,7 @@ import { Footer } from "@/components/footer"
 import { AssetCard } from "@/components/asset-card"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+
 import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Shield, Users, TrendingUp, Anchor, Calendar } from "lucide-react"
 import Image from "next/image"
@@ -96,8 +95,7 @@ export default function HomePage() {
                   Own Fractions of <span className="text-primary">Luxury Assets</span>
                 </h1>
                 <p className="text-xl text-muted-foreground text-pretty max-w-lg">
-                  Invest in yachts, private jets, and luxury cars with as little as $100. Democratizing luxury through
-                  blockchain technology.
+                  LuxeShare acquires premium luxury assets and offers fractional ownership to investors. We handle everything from acquisition to monetization, so you can simply invest and earn.
                 </p>
               </div>
 
@@ -183,8 +181,8 @@ export default function HomePage() {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Anchor className="w-8 h-8 text-primary" />
                 </div>
-                <CardTitle>Choose Your Asset</CardTitle>
-                <CardDescription>Browse our curated collection of luxury yachts, jets, and cars</CardDescription>
+                <CardTitle>We Source Premium Assets</CardTitle>
+                <CardDescription>Our team identifies and acquires undervalued luxury assets worldwide</CardDescription>
               </CardHeader>
             </Card>
 
@@ -193,8 +191,8 @@ export default function HomePage() {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="w-8 h-8 text-primary" />
                 </div>
-                <CardTitle>Buy Shares</CardTitle>
-                <CardDescription>Purchase fractional ownership using SOL or USDC through your wallet</CardDescription>
+                <CardTitle>Invest in Shares</CardTitle>
+                <CardDescription>Buy fractional ownership in company-managed luxury assets using SOL or USDC</CardDescription>
               </CardHeader>
             </Card>
 
@@ -203,8 +201,8 @@ export default function HomePage() {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Calendar className="w-8 h-8 text-primary" />
                 </div>
-                <CardTitle>Enjoy & Earn</CardTitle>
-                <CardDescription>Book usage time and earn from rental income when others use the asset</CardDescription>
+                <CardTitle>Earn Passive Income</CardTitle>
+                <CardDescription>We handle rentals and management while you earn from your investment</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -218,7 +216,7 @@ export default function HomePage() {
             <div>
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Featured Assets</h2>
               <p className="text-xl text-muted-foreground">
-                Discover premium luxury assets available for fractional ownership
+                Professionally acquired and managed luxury assets ready for investment
               </p>
             </div>
             <Button variant="outline" className="bg-transparent">
@@ -278,69 +276,7 @@ export default function HomePage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center space-y-4 mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">List Your Asset</h2>
-              <p className="text-xl text-muted-foreground text-pretty">
-                Own a luxury asset? Join our platform and start earning from fractional ownership
-              </p>
-            </div>
 
-            <Card className="shadow-lg">
-              <CardHeader>
-                <CardTitle>Asset Owner Application</CardTitle>
-                <CardDescription>
-                  Tell us about your luxury asset and we&apos;ll get back to you within 24 hours
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Full Name</label>
-                    <Input placeholder="Enter your full name" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Email</label>
-                    <Input type="email" placeholder="Enter your email" />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Asset Type</label>
-                    <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                      <option>Select asset type</option>
-                      <option>Yacht</option>
-                      <option>Private Jet</option>
-                      <option>Luxury Car</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Asset Value (USD)</label>
-                    <Input placeholder="e.g., $2,500,000" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Asset Description</label>
-                  <Textarea
-                    placeholder="Describe your asset, including make, model, year, location, and any special features..."
-                    rows={4}
-                  />
-                </div>
-
-                <Button className="w-full" size="lg">
-                  Submit Application
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>

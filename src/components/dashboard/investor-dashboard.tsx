@@ -33,24 +33,7 @@ const mockPortfolio = [
   },
 ]
 
-const mockBookings = [
-  {
-    id: "1",
-    asset: "Azimut Grande 35M",
-    dates: "Dec 15-22, 2024",
-    amount: "2.5 SOL",
-    status: "confirmed",
-    location: "Monaco",
-  },
-  {
-    id: "2",
-    asset: "Gulfstream G650",
-    dates: "Jan 8-15, 2025",
-    amount: "3.0 SOL",
-    status: "pending",
-    location: "Miami",
-  },
-]
+
 
 const availableAssets = [
   {
@@ -80,12 +63,7 @@ const availableAssets = [
 ]
 
 export function InvestorDashboard() {
-  const handleBookAsset = (_assetId: string) => {
-    toast({
-      title: "Booking Requested",
-      description: "Your booking request has been submitted for approval",
-    })
-  }
+
 
   const handleBuyShares = (_assetId: string, _shares: number) => {
     toast({
@@ -144,12 +122,12 @@ export function InvestorDashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Bookings</CardTitle>
-              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{mockBookings.length}</div>
-              <p className="text-xs text-muted-foreground">Upcoming experiences</p>
+              <div className="text-2xl font-bold">$892</div>
+              <p className="text-xs text-muted-foreground">+12.5% from last month</p>
             </CardContent>
           </Card>
         </div>
@@ -159,7 +137,7 @@ export function InvestorDashboard() {
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="browse">Browse Assets</TabsTrigger>
             <TabsTrigger value="portfolio">My Portfolio</TabsTrigger>
-            <TabsTrigger value="bookings">My Bookings</TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="history">History</TabsTrigger>
           </TabsList>
 
@@ -179,10 +157,44 @@ export function InvestorDashboard() {
 
           {/* Portfolio */}
           <TabsContent value="portfolio" className="space-y-6">
+            {/* Portfolio Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Total Portfolio Value</CardTitle>
+                  <Wallet className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">$1,282</div>
+                  <p className="text-xs text-muted-foreground">Across 2 assets</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Total P&L</CardTitle>
+                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-green-600">+$50</div>
+                  <p className="text-xs text-muted-foreground">+4.1% overall return</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Monthly Income</CardTitle>
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold text-green-600">$892</div>
+                  <p className="text-xs text-muted-foreground">From asset usage</p>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card>
               <CardHeader>
-                <CardTitle>My Portfolio</CardTitle>
-                <CardDescription>Your luxury asset investments</CardDescription>
+                <CardTitle>Portfolio Details</CardTitle>
+                <CardDescription>Detailed breakdown of your investments</CardDescription>
               </CardHeader>
               <CardContent>
                 <Table>
@@ -231,46 +243,109 @@ export function InvestorDashboard() {
             </Card>
           </TabsContent>
 
-          {/* Bookings */}
-          <TabsContent value="bookings" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>My Bookings</CardTitle>
-                <CardDescription>Your upcoming and past bookings</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {mockBookings.map((booking) => (
-                    <Card key={booking.id} className="border-l-4 border-l-primary">
-                      <CardContent className="pt-6">
-                        <div className="flex justify-between items-start">
-                          <div className="space-y-2">
-                            <h3 className="font-semibold">{booking.asset}</h3>
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                              <div className="flex items-center gap-1">
-                                <Calendar className="w-4 h-4" />
-                                {booking.dates}
-                              </div>
-                              <div className="flex items-center gap-1">
-                                <MapPin className="w-4 h-4" />
-                                {booking.location}
-                              </div>
-                            </div>
-                            <p className="text-sm">Amount: {booking.amount}</p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Badge variant={booking.status === "confirmed" ? "default" : "secondary"}>
-                              {booking.status === "pending" && <Clock className="w-3 h-3 mr-1" />}
-                              {booking.status}
-                            </Badge>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+          {/* Analytics */}
+          <TabsContent value="analytics" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Performance Overview */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Performance Overview</CardTitle>
+                  <CardDescription>Your investment performance metrics</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Total Return</span>
+                    <span className="text-green-600 font-semibold">+4.1%</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Annualized Return</span>
+                    <span className="text-green-600 font-semibold">+12.3%</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Best Performing Asset</span>
+                    <span className="font-semibold">Azimut Grande 35M</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium">Portfolio Diversity</span>
+                    <span className="font-semibold">2 Asset Types</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Asset Allocation */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Asset Allocation</CardTitle>
+                  <CardDescription>Distribution of your investments</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-sm font-medium">Yachts</span>
+                        <span className="text-sm text-muted-foreground">62.5%</span>
+                      </div>
+                      <div className="w-full bg-secondary rounded-full h-2">
+                        <div className="bg-blue-600 h-2 rounded-full" style={{width: '62.5%'}}></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-sm font-medium">Private Jets</span>
+                        <span className="text-sm text-muted-foreground">37.5%</span>
+                      </div>
+                      <div className="w-full bg-secondary rounded-full h-2">
+                        <div className="bg-green-600 h-2 rounded-full" style={{width: '37.5%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Monthly Income Trend */}
+              <Card className="md:col-span-2">
+                <CardHeader>
+                  <CardTitle>Income Trend</CardTitle>
+                  <CardDescription>Monthly income from your investments over the last 6 months</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-6 gap-4 text-center">
+                      <div className="space-y-2">
+                        <div className="text-xs text-muted-foreground">Jul</div>
+                        <div className="bg-blue-600 rounded-t" style={{height: '40px'}}></div>
+                        <div className="text-xs font-medium">$720</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-muted-foreground">Aug</div>
+                        <div className="bg-blue-600 rounded-t" style={{height: '55px'}}></div>
+                        <div className="text-xs font-medium">$810</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-muted-foreground">Sep</div>
+                        <div className="bg-blue-600 rounded-t" style={{height: '45px'}}></div>
+                        <div className="text-xs font-medium">$765</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-muted-foreground">Oct</div>
+                        <div className="bg-blue-600 rounded-t" style={{height: '60px'}}></div>
+                        <div className="text-xs font-medium">$845</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-muted-foreground">Nov</div>
+                        <div className="bg-blue-600 rounded-t" style={{height: '50px'}}></div>
+                        <div className="text-xs font-medium">$780</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-xs text-muted-foreground">Dec</div>
+                        <div className="bg-green-600 rounded-t" style={{height: '70px'}}></div>
+                        <div className="text-xs font-medium">$892</div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           {/* Transaction History */}
@@ -278,30 +353,51 @@ export function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Transaction History</CardTitle>
-                <CardDescription>Your investment and booking history</CardDescription>
+                <CardDescription>Your investment transaction history</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-3 border-b">
                     <div>
-                      <p className="font-medium">Purchased 5 shares</p>
-                      <p className="text-sm text-muted-foreground">Azimut Grande 35M • Nov 15, 2024</p>
+                      <p className="font-medium">Monthly Dividend Payment</p>
+                      <p className="text-sm text-muted-foreground">Portfolio Income • Dec 1, 2024</p>
                     </div>
-                    <span className="font-semibold text-red-600">-625 SOL</span>
+                    <span className="font-semibold text-green-600">+$892</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b">
                     <div>
-                      <p className="font-medium">Rental Income</p>
-                      <p className="text-sm text-muted-foreground">Azimut Grande 35M • Nov 20, 2024</p>
+                      <p className="font-medium">Asset Appreciation</p>
+                      <p className="text-sm text-muted-foreground">Azimut Grande 35M • Nov 28, 2024</p>
                     </div>
-                    <span className="font-semibold text-green-600">+125 SOL</span>
+                    <span className="font-semibold text-green-600">+$35</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b">
+                    <div>
+                      <p className="font-medium">Purchased 5 shares</p>
+                      <p className="text-sm text-muted-foreground">Azimut Grande 35M • Nov 15, 2024</p>
+                    </div>
+                    <span className="font-semibold text-red-600">-$625</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b">
+                    <div>
+                      <p className="font-medium">Monthly Dividend Payment</p>
+                      <p className="text-sm text-muted-foreground">Portfolio Income • Nov 1, 2024</p>
+                    </div>
+                    <span className="font-semibold text-green-600">+$780</span>
                   </div>
                   <div className="flex justify-between items-center py-3 border-b">
                     <div>
                       <p className="font-medium">Purchased 3 shares</p>
                       <p className="text-sm text-muted-foreground">Gulfstream G650 • Oct 28, 2024</p>
                     </div>
-                    <span className="font-semibold text-red-600">-267 SOL</span>
+                    <span className="font-semibold text-red-600">-$267</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b">
+                    <div>
+                      <p className="font-medium">Asset Appreciation</p>
+                      <p className="text-sm text-muted-foreground">Gulfstream G650 • Oct 15, 2024</p>
+                    </div>
+                    <span className="font-semibold text-green-600">+$15</span>
                   </div>
                 </div>
               </CardContent>

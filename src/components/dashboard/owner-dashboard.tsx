@@ -3,15 +3,14 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Upload, DollarSign, Calendar, TrendingUp, CheckCircle, XCircle, Clock, Eye, Edit } from "lucide-react"
+import { DollarSign, Calendar, TrendingUp, CheckCircle, XCircle, Clock, Eye, Edit } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 
-// Mock data
+// Mock data for company-owned assets
 const mockAssets = [
   {
     id: "1",
@@ -23,17 +22,34 @@ const mockAssets = [
     monthlyIncome: 12500,
     totalIncome: 87500,
     nextBooking: "Dec 15, 2024",
+    acquisitionDate: "Oct 2024",
+    location: "Monaco",
   },
   {
     id: "2",
     name: "Ferrari 488 GTB",
     type: "Car",
-    status: "Pending",
+    status: "Active",
     totalShares: 50,
+    soldShares: 32,
+    monthlyIncome: 4200,
+    totalIncome: 25200,
+    nextBooking: "Dec 22, 2024",
+    acquisitionDate: "Nov 2024",
+    location: "Los Angeles",
+  },
+  {
+    id: "3",
+    name: "Gulfstream G650",
+    type: "Private Jet",
+    status: "Pending Launch",
+    totalShares: 80,
     soldShares: 0,
     monthlyIncome: 0,
     totalIncome: 0,
     nextBooking: "Not scheduled",
+    acquisitionDate: "Dec 2024",
+    location: "Miami",
   },
 ]
 
@@ -65,33 +81,6 @@ const mockBookings = [
 ]
 
 export function OwnerDashboard() {
-  const [isUploading, setIsUploading] = useState(false)
-  const [isMinting, setIsMinting] = useState(false)
-
-  const handleImageUpload = async () => {
-    setIsUploading(true)
-    // Mock IPFS upload
-    setTimeout(() => {
-      setIsUploading(false)
-      toast({
-        title: "Image Uploaded",
-        description: "Asset image uploaded to IPFS successfully",
-      })
-    }, 2000)
-  }
-
-  const handleMintNFT = async () => {
-    setIsMinting(true)
-    // Mock NFT minting
-    setTimeout(() => {
-      setIsMinting(false)
-      toast({
-        title: "NFT Minted",
-        description: "Asset NFT and fractional tokens created successfully",
-      })
-    }, 3000)
-  }
-
   const handleBookingAction = (bookingId: string, action: "approve" | "cancel") => {
     toast({
       title: `Booking ${action === "approve" ? "Approved" : "Cancelled"}`,
@@ -104,20 +93,20 @@ export function OwnerDashboard() {
       <div className="space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Asset Owner Dashboard</h1>
-          <p className="text-muted-foreground">Manage your luxury assets and track performance</p>
+          <h1 className="text-3xl font-bold text-foreground">Company Admin Dashboard</h1>
+          <p className="text-muted-foreground">Manage company-owned luxury assets and track performance</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Assets</CardTitle>
+              <CardTitle className="text-sm font-medium">Company Assets</CardTitle>
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">2</div>
-              <p className="text-xs text-muted-foreground">1 active, 1 pending</p>
+              <div className="text-2xl font-bold">3</div>
+              <p className="text-xs text-muted-foreground">2 active, 1 launching</p>
             </CardContent>
           </Card>
 
@@ -138,8 +127,8 @@ export function OwnerDashboard() {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">77/150</div>
-              <p className="text-xs text-muted-foreground">51% ownership sold</p>
+              <div className="text-2xl font-bold">109/230</div>
+              <p className="text-xs text-muted-foreground">47% of shares sold</p>
             </CardContent>
           </Card>
 
@@ -156,83 +145,16 @@ export function OwnerDashboard() {
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="register" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="register">Register Asset</TabsTrigger>
-            <TabsTrigger value="assets">My Assets</TabsTrigger>
+        <Tabs defaultValue="assets" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="assets">Company Assets</TabsTrigger>
             <TabsTrigger value="bookings">Bookings</TabsTrigger>
             <TabsTrigger value="income">Income</TabsTrigger>
           </TabsList>
 
-          {/* Asset Registration */}
-          <TabsContent value="register" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Register New Asset</CardTitle>
-                <CardDescription>Add a new luxury asset to the platform</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Asset Name</label>
-                    <Input placeholder="e.g., Azimut Grande 35M" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Asset Type</label>
-                    <select className="w-full px-3 py-2 border border-input rounded-md bg-background">
-                      <option>Select type</option>
-                      <option>Yacht</option>
-                      <option>Private Jet</option>
-                      <option>Luxury Car</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Description</label>
-                  <Textarea placeholder="Describe your asset in detail..." rows={3} />
-                </div>
 
-                <div className="grid md:grid-cols-3 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Rental Price (per day)</label>
-                    <Input placeholder="e.g., 5 SOL" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Total Shares</label>
-                    <Input placeholder="e.g., 100" type="number" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Location</label>
-                    <Input placeholder="e.g., Monaco" />
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <label className="text-sm font-medium">Asset Images</label>
-                  <div className="border-2 border-dashed border-border rounded-lg p-8 text-center">
-                    <Upload className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground mb-4">Upload high-quality images of your asset</p>
-                    <Button onClick={handleImageUpload} disabled={isUploading}>
-                      {isUploading ? "Uploading to IPFS..." : "Upload Images"}
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button onClick={handleMintNFT} disabled={isMinting} className="flex-1">
-                    {isMinting ? "Minting NFT..." : "Mint NFT & Create Shares"}
-                  </Button>
-                  <Button variant="outline" className="bg-transparent">
-                    Save Draft
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          {/* My Assets */}
+          {/* Company Assets */}
           <TabsContent value="assets" className="space-y-6">
             <div className="grid gap-6">
               {mockAssets.map((asset) => (
@@ -259,7 +181,7 @@ export function OwnerDashboard() {
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid md:grid-cols-4 gap-4">
+                    <div className="grid md:grid-cols-5 gap-4">
                       <div>
                         <p className="text-sm text-muted-foreground">Shares Sold</p>
                         <p className="text-lg font-semibold">
@@ -275,8 +197,12 @@ export function OwnerDashboard() {
                         <p className="text-lg font-semibold">${asset.totalIncome.toLocaleString()}</p>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Next Booking</p>
-                        <p className="text-lg font-semibold">{asset.nextBooking}</p>
+                        <p className="text-sm text-muted-foreground">Location</p>
+                        <p className="text-lg font-semibold">{asset.location}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Acquired</p>
+                        <p className="text-lg font-semibold">{asset.acquisitionDate}</p>
                       </div>
                     </div>
                   </CardContent>
