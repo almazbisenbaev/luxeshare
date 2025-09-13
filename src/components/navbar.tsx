@@ -35,9 +35,6 @@ export function Navbar() {
             <Link href="/" className="text-foreground hover:text-primary transition-colors">
               Home
             </Link>
-            <Link href="/assets" className="text-foreground hover:text-primary transition-colors">
-              Assets
-            </Link>
             <Link href="/dashboard" className="text-foreground hover:text-primary transition-colors">
               Dashboard
             </Link>

@@ -1,6 +1,5 @@
 "use client"
 
-import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { AssetCard } from "@/components/asset-card"
 import { Button } from "@/components/ui/button"
@@ -82,7 +81,6 @@ const blogPosts = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
 
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">

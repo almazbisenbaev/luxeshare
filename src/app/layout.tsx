@@ -9,6 +9,8 @@ import { WalletProvider } from "@/lib/wallet-context"
 import { Toaster } from "@/components/ui/toaster"
 import "./globals.css"
 
+import { Navbar } from "@/components/navbar"
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +38,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <WalletProvider>
+          <Navbar />
           <Suspense fallback={null}>{children}</Suspense>
           <Toaster />
         </WalletProvider>

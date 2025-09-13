@@ -14,7 +14,6 @@ export default function DashboardPage() {
   if (!wallet.connected) {
     return (
       <div className="min-h-screen bg-background">
-        <Navbar />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-md mx-auto">
             <div className="text-center space-y-4 mb-8">
@@ -33,7 +32,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
       <InvestorDashboard />
       <Footer />
     </div>
